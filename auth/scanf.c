@@ -1,17 +1,14 @@
-#include <stdio.h>
-#include <ctype.h>
-#include <string.h>
+#include "stdio.h"
+#include "string.h"
 
-int main (void) {    	
+int main() {
 	
 	char userInput[64];
 	int num = 0;
-	char temp;
 	size_t length = 0;
 	int index = 0;
 	int flag = 0;
-	
-	while(num == 0) {
+	while( num == 0 ) {
 	
 		length = 0;
 		flag = 0;
@@ -21,7 +18,7 @@ int main (void) {
 		fgets(userInput, 63, stdin);
 		length = strlen(userInput);
 		
-		if(length < 2 || length > 3) {
+		if( length < 2 || length > 3) {
 			printf("Invalid strlen()\n");
 			continue;			
 		}
@@ -40,15 +37,17 @@ int main (void) {
 			continue;			
 		}
 		
-		if(sscanf(userInput, "%d", &num) != 1) {
+		if( sscanf(userInput, "%d", &num) != 1) {
 			printf("Invalid sscanf()\n");
 			continue;
 		}
 				
-		if(num < 1 || num > 99) {
+		if( num < 1 || num > 99) {
 			printf("Invalid range\n");
 			continue;
 		}
+		
+		printf("Number OK: %d\n", num);
 	}
-	return num;
+	return 0;
 }
