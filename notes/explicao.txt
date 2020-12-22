@@ -1,0 +1,1 @@
+nao deu pra fazer com a biblioteca do CC50, dava erro e eu nao consegui arrumar. Sem a biblioteca deles funcionou.

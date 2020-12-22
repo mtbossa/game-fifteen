@@ -1,0 +1,21 @@
+
+./fifteen 3
+
+1. Sequencia para bug: 1, 4, 7, 6, 3, 7, 6, 3 <- o d muda para 0 nessa 'ultimo 3'
+2. Sequencia para bub: 1, 2, 5, 8, 7, 4, 3, 1, 2, 5, 8			, 3, 4, 7, 3, 4, 7, 3 <- mesmo erro. 
+
+Quando o "3" chega no board[0][1];
+
+./fifteen 4
+
+1. Sequencia para bug: 
+
+Quando o "4" chega no board [0][1];
+
+./fifteen 5
+
+Quando o "5" chega no board [0][1];
+
+O bug ocorre sempre que o d chega na posicao board[0][1];
+
+// Funcionou sem utilizar a biblioteca do CC50
