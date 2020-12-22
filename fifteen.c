@@ -47,7 +47,7 @@ void greet(void);
 void initCorrect(void);
 void init(void);
 void draw(void);
-int getInt();
+bool getTile(int *ptr_tile);
 bool move(int tile);
 bool won(void);
 
@@ -92,10 +92,13 @@ main(int argc, char *argv[]) {
         }
 
         // prompt for move
-        int tile = getInt();
-		if(tile < 0 || tile > (d*d) - 1) {
-			printf("Voce precisa digitar um numero positivo menor do que o numero de pecas.");
-		}
+		int tile;
+		int *ptr_tile = &tile;
+		if(!getTile(ptr_tile)) {
+			printf("Digite um numero valido.");
+			tile = 0;
+			usleep(500000);
+		}		
 
         // move if possible, else report illegality
         if (!move(tile)) {
@@ -213,59 +216,49 @@ void draw(void) {
 }
 
 /* 	
- * If tile borders empty space, moves tile and returns true, else
- * returns false. 
+ *  If invalid input, return false. Else, returns true.
  */
 
-int getInt(void) {
+bool getTile(int *ptr_tile) {
 
 	char userInput[64];
 	int num = 0;
 	char temp;
-	size_t length = 0;
-	int index = 0;
-	int flag = 0;
-	
-	while(num == 0) {
-	
-		length = 0;
-		flag = 0;
-		num = 0;
+	size_t length = 0;			
 		
-		printf("Tile to move: ");		
-		fgets(userInput, 63, stdin);
-		length = strlen(userInput);
-		
-		if(length < 2 || length > 3) {
-			printf("Digite um numero valido\n");
-			continue;			
-		}
+	printf("Tile to move: ");		
+	fgets(userInput, 63, stdin);
 
-		length--;
+	length = strlen(userInput);
 		
-		for(index = 0; index < length; ++index) {
-			if(userInput[index] < '0' || userInput[index] > '9') {
-				flag = 1;
-				break;
-			}
-		}
-		
-		if(flag) {
-			printf("Digite um numero valido\n");
-			continue;			
-		}
-		
-		if(sscanf(userInput, "%d", &num) != 1) {
-			printf("Digite um numero valido\n");
-			continue;
-		}
-				
-		if(num < 1 || num > 99) {
-			printf("Digite um numero valido\n");
-			continue;
+	if(length < 2 || length > 3) {
+		return false;			
+	}
+	
+	length--;
+	int flag = 0;
+
+	for(int index = 0; index < length; ++index) {
+		if(userInput[index] < '0' || userInput[index] > '9') {
+			flag = 1;
+			break;
 		}
 	}
-	return num;
+		
+	if(flag) {
+		return false;			
+	}
+		
+	if(sscanf(userInput, "%d", &num) != 1) {
+		return false;
+	}
+				
+	if(num < 1 || num > 99) {
+		return false;
+	}
+
+	*ptr_tile = num;
+	return true;
 }
 
 /* 	
