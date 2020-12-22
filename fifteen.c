@@ -43,10 +43,10 @@ int d;
 // prototypes
 void clear(void);
 void greet(void);
-void initCorrect(void);
-void init(void);
+void initCorrect(int pecas);
+void init(int pecas);
 void draw(void);
-bool getTile(int *ptr_tile);
+bool getTile(int *ptr_tile, int pecas);
 bool move(int tile);
 bool won(void);
 
@@ -68,12 +68,19 @@ int main(int argc, char *argv[]) {
          DIM_MIN, DIM_MIN, DIM_MAX, DIM_MAX);
         return 2;
     }
+
+	/* 
+     * Declaração e cáculdo da quantidade de peças. Não utilizei variável global, pois em uma função existe pecas--, que vai diminuir a quantidade na variável em si,
+     * então tive que declarar aqui e passar esse valor para as funções que a utiliza, pois assim será utilizado somente o valor de pecas, e o seue valor será utilizado
+     * e modificado somente dentro das funções.
+     */
+	int pecas = (d * d) - 1; 
    
 	// initialize the correct board
-	initCorrect();
+	initCorrect(pecas);
 
     // initialize the board
-    init();
+    init(pecas);
 
     // accept moves until game is won
     while (true) {
@@ -93,7 +100,7 @@ int main(int argc, char *argv[]) {
 		int tile;
 		int *ptr_tile = &tile; // ponteiro com endereço da int tile, utilizado na funcao getTile(int *ptr_tile)
 		
-		if(!getTile(ptr_tile)) { // se input do usuario nao for um inteiro valido volta para o loop
+		if(!getTile(ptr_tile, pecas)) { // se input do usuario nao for um inteiro valido volta para o loop
 			printf("Digite um numero valido.\n");			
 			tile = 0;
 			usleep(500000);
@@ -139,10 +146,9 @@ void greet(void) {
  * Initializes the game's board with the correct array  
  */
 
-void initCorrect(void) {	
+void initCorrect(int pecas) {	
 	//comecar pecas do 1 até d - 1, ir aumentando as pecas. Criar um array correctBoard com as peças no lugar, comparar o array atual com o correctBoard
-    int pecas = (d * d) - 1;
-	int pecas_certas = 1;
+    int pecas_certas = 1;
     for(int i = 0; i < d; i++) {
     	for(int j = 0; j < d; j++) {
             if(pecas_certas <= pecas) {
@@ -158,10 +164,9 @@ void initCorrect(void) {
  * (i.e., fills 2D array with values but does not actually print them).  
  */
 
-void init(void) {		
+void init(int pecas) {		
     // se o d for par, pecas sera impar, entao o 1 e 2 devem ser trocados
-    int pecas = (d * d) - 1;
-	if(d % 2 == 0) {
+    if(d % 2 == 0) {
     	for(int i = 0; i < d; i++) {
     		for(int j = 0; j < d; j++) { 
     			if(pecas > 2) {
@@ -224,8 +229,7 @@ void draw(void) {
  *  If invalid input, return false. Else, return true. Utiliza fgets, ou seja, recebe uma string mas faz as verificações, depois transforma para int e coloca no ptr_tile
  */
 
-bool getTile(int *ptr_tile) {
-	int pecas = (d * d) - 1;
+bool getTile(int *ptr_tile, int pecas) {
 	char userInput[64];	// array para guardar o input
 	int num = 0;
 	size_t length = 0; // pode ter qualquer valor, por isso size_t	
