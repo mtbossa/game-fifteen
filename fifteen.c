@@ -47,6 +47,7 @@ void greet(void);
 void initCorrect(void);
 void init(void);
 void draw(void);
+int getInt();
 bool move(int tile);
 bool won(void);
 
@@ -91,9 +92,7 @@ main(int argc, char *argv[]) {
         }
 
         // prompt for move
-        printf("Tile to move: ");
-        int tile;
-		scanf("%d", &tile);
+        int tile = getInt();
 		if(tile < 0 || tile > (d*d) - 1) {
 			printf("Voce precisa digitar um numero positivo menor do que o numero de pecas.");
 		}
@@ -211,8 +210,64 @@ void draw(void) {
         	}
         }
     }
-}        	
-        
+}
+
+/* 	
+ * If tile borders empty space, moves tile and returns true, else
+ * returns false. 
+ */
+
+int getInt(void) {
+
+	char userInput[64];
+	int num = 0;
+	char temp;
+	size_t length = 0;
+	int index = 0;
+	int flag = 0;
+	
+	while(num == 0) {
+	
+		length = 0;
+		flag = 0;
+		num = 0;
+		
+		printf("Tile to move: ");		
+		fgets(userInput, 63, stdin);
+		length = strlen(userInput);
+		
+		if(length < 2 || length > 3) {
+			printf("Digite um numero valido\n");
+			continue;			
+		}
+
+		length--;
+		
+		for(index = 0; index < length; ++index) {
+			if(userInput[index] < '0' || userInput[index] > '9') {
+				flag = 1;
+				break;
+			}
+		}
+		
+		if(flag) {
+			printf("Digite um numero valido\n");
+			continue;			
+		}
+		
+		if(sscanf(userInput, "%d", &num) != 1) {
+			printf("Digite um numero valido\n");
+			continue;
+		}
+				
+		if(num < 1 || num > 99) {
+			printf("Digite um numero valido\n");
+			continue;
+		}
+	}
+	return num;
+}
+
 /* 	
  * If tile borders empty space, moves tile and returns true, else
  * returns false. 

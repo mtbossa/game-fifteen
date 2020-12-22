@@ -2,9 +2,7 @@
 #include <ctype.h>
 #include <string.h>
 
-int main (void) {
-
-    printf("\nProgram Start.....\n\n");	
+int main (void) {    	
 	
 	char userInput[64];
 	int num = 0;
@@ -12,6 +10,7 @@ int main (void) {
 	size_t length = 0;
 	int index = 0;
 	int flag = 0;
+	
 	while(num == 0) {
 	
 		length = 0;
@@ -50,25 +49,6 @@ int main (void) {
 			printf("Invalid range\n");
 			continue;
 		}
-		printf("Number OK:%d\n",num);
 	}
-		
-	printf("\nProgram Quit.....\n");
-	
-	return 0;
-    
-    /* char numero[3];
-    
-    printf("Numero: ");
-    fgets(numero, 3, stdin);
-    printf("%s\n", numero);
-
-    for(int i = 0; i < 2; i++){
-        if(!isdigit(numero[i])) {           
-            printf("Digite um numero");
-            return 1;
-        }
-    }
-    printf("saiu do loop");*/
-
+	return num;
 }
