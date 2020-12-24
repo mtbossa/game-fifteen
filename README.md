@@ -4,4 +4,4 @@ The Fifteen Puzzle Game in C language
 
 ---
 
-Exercise for the *Week's 4 pset* of the **CC50 course**, the brazilian version of **Harvard CS50 course**.
+Exercise for the *Week's 4 PSet (Problem Set 4)* of the **[CC50 course](https://cc50.estudarfora.org.br)**, the brazilian version of **[Harvard CS50 course](https://cs50.harvard.edu/college/2020/fall/)**.
