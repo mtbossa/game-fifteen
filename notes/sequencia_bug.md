@@ -2,7 +2,7 @@
 
 **./fifteen 3**
 
-1. Sequencia para bug: 1, 4, 7, 6, 3, 7, 6, 3 <- o d muda para 0 nessa 'ultimo 3'
+1. Sequencia para bug: 1, 4, 7, 6, 3, 7, 6, 3 <- o `d` muda para 0 nesse último 3;
 
 Quando o "3" chega no `board[0][1]`;
 
