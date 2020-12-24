@@ -1,9 +1,0 @@
-questions.txt
-
-CC50
-Set de Problemas 3
-
-i.   3x3, 5x5, 6x6, 7x7, 8x8, 9x9.
-ii.  int.
-iii. greet().
-iv.  void init(void); void draw(void); bool move(int tile); bool won(void);
